@@ -56,12 +56,13 @@ const Orderbook: React.FC<OrderbookProps> = ({ asset , orders}) => {
 
         // Check if the side exists in the orderbook
         if (side === 'BUY' && updatedOrderbook.bids) {
-            // Add the new order to the bids
+            // Add the new order to the bids (currently does not update JSON yet)
             updatedOrderbook.bids.push({ price: order.price.toString(), quantity: order.quantity.toString() });
         } else if (side === 'SELL' && updatedOrderbook.asks) {
             // Add the new order to the asks
             updatedOrderbook.asks.push({ price: order.price.toString(), quantity: order.quantity.toString() });
             updatedOrderbook.asks.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            console.log(updatedOrderbook.asks);
         }
         });
 

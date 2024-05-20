@@ -4,7 +4,17 @@
 Please thoroughly review the provided Assignment requirements PDF for the description.
 
 ## Candidate Notes
-Please add any notes here.
+Currently, what my Orderbook does is pull the data from the server and then update the client side
+whenever orders are made from the user. The reason I have done it like this is because I wanted to firstly
+test to see if the orders would be executed without having to change the JSON files. As of writing this, 
+I am still working on making it so that the orders can modify the server JSON. If given more time, I would have
+made this adjustment.
+
+For the design, I wanted it to replicate the Orderbook and Order Forms from the Coinbase cryptobook video.
+To me, I thought it made sense not to make any changes if it was already working for so many users. One aspect
+about the orderbook I kept was how the bids and asks are sorted, where the top of the bids are the highest
+and the bottom of the asks are the lowest. In the future, I would have added a way to highlight which
+of the ask orders would be fulfilled first if the user decided to do a market order.
 
 ## About the Template
 

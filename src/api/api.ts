@@ -11,7 +11,7 @@ export const getOrderbook = async (asset: string) => {
 
 // Trade API
 export const sendTrade = async (order: { asset: string, side: 'BUY' | 'SELL', type: 'LIMIT' | 'MARKET', quantity: number, price?: number, notional: number }) => {
-    try {
+    try { // Try to send the trade request
         console.log('sending trade request:', order);
         const response = await fetch('http://localhost:3000/trade/', {
             method: 'POST',
