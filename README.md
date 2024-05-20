@@ -17,6 +17,10 @@ where the top of the bids are the highest and the bottom of the asks are the low
 I would have added a way to highlight which of the ask orders would be fulfilled first if the user
 decided to do a market order.
 
+My test cases right now check to see if the webpage and the orderbook are present. In the future, a good
+test case to implement would be to check to see if connection to the server is valid and if data is being pulled
+and shown on the orderbook. Another good test case would be to see if orders are updating the server.
+
 ## About the Template
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
