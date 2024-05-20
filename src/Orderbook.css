@@ -1,0 +1,57 @@
+.orderbook {
+    display: flex; /* Make list scrollable */
+    flex-direction: column; /* Align items vertically */
+    gap: 20px; /* Gap between components */
+    max-height: 600px; /* Limit the height of the orderbook */
+  }
+  
+  .orderbook-section { /* Bids and Asks sections */
+    display: flex; /* Make list scrollable */
+    flex-direction: column; /* Align components vertically */
+    overflow: hidden; /* Hide overflow */
+  }
+  
+  .orderbook-section h3 { /* Bids and Ask headers */
+    margin: 0; /* Remove default margin */
+    padding: 10px; /* Add padding around text */
+    background-color: #f0f0f0; /* Light grey background */
+    border-bottom: 1px solid #ccc; /* Add a border at the bottom */
+  }
+  
+  .order-header { /* Price Quantity and Amount headers */
+    display: flex; /* Display items in a row */
+    padding: 10px; /* Add padding around text */
+    background-color: #e0e0e0; /* Light grey background */
+    font-weight: bold; /* Bold text */
+  }
+  
+  .order-header span { /* Price Quantity and Amount columns */
+    flex: 1; /* Make columns equal width */
+    text-align: center; /* Align text to the center */
+  }
+  
+  .order-list {
+    overflow-y: auto; /* Make list scrollable */
+    display: flex; /* Display items in a row */
+    flex-direction: column; /* Align items vertically */
+  }
+  
+  .order-item { 
+    display: flex; /* Display items in a row */
+    justify-content: space-between; /* Align items to the center */
+    padding: 10px; /* Add padding around text */
+    border-bottom: 1px solid #eee; /* Add a border at the bottom */
+  }
+  
+  .order-item span {
+    flex: 1; /* Make columns equal width */
+    text-align: center; /* Align text to the center */
+  }
+  
+  .asks-list .order-item {
+    background-color: #ffe6e6; /* Light red for asks */
+  }
+  
+  .bids-list .order-item {
+    background-color: #e6ffe6; /* Light green for bids */
+  }

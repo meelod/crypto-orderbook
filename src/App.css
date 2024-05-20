@@ -1,0 +1,20 @@
+header {
+  background-color: #333; /* Dark grey */
+  color: #fff; /* White text */
+  padding: 20px; /* Padding around text */
+  text-align: center; /* Align text to the center */
+}
+
+.App-container {
+  display: flex;
+  justify-content: center; /* Align items to the center */
+  gap: 10px; /* Gap between components */
+  padding: 20px; /* Padding between header and components */
+}
+
+.App-header {
+  display: flex; /* Display items in a row */
+  flex-direction: column; /* Align items vertically */
+  align-items: center; /* Align items to the center */
+  gap: 10px; /* Gap between items */
+}

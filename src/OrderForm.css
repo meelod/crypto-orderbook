@@ -1,0 +1,37 @@
+.OrderForm {
+    width: 300px; /* Change the width of the form */
+    padding: 20px; /* Padding around the form */
+    border: 1px solid #ccc; /* Add a border around the form */
+    border-radius: 5px; /* Add rounded corners to the form */
+    background-color: #f9f9f9; /* Light grey background */
+  }
+  
+  .OrderForm h2 { 
+    margin-top: 0; /* Remove the default margin */
+  }
+  
+  .OrderForm div {
+    margin-bottom: 10px; /* Add space between form elements */
+  }
+  
+  .OrderForm input {
+    width: 100%; /* Make the input full width */
+    padding: 5px; /* Add padding to the input */
+    box-sizing: border-box; /* Include padding in the width */
+  }
+  
+  .OrderForm button {
+    width: 100%; /* Make the button full width */
+    padding: 10px; /* Add padding to the button */
+    margin-top: 10px; /* Add space between the button and the input */
+    background-color: #007bff; /* Blue button */
+    color: white; /* White text */
+    border: none; /* Remove the border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Add a pointer cursor */
+  }
+  
+  .OrderForm button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
