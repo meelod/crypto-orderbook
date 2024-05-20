@@ -17,6 +17,10 @@ where the top of the bids are the highest and the bottom of the asks are the low
 I would have added a way to highlight which of the ask orders would be fulfilled first if the user
 decided to do a market order.
 
+I decided that having all the data would be a nice to have feature for users so they have all the information
+they needed to make any decisions in their orders. That is why I made both the bids and asks independently
+scrollable.
+
 My test cases right now check to see if the webpage and the orderbook are present. In the future, a good
 test case to implement would be to check to see if connection to the server is valid and if data is being pulled
 and shown on the orderbook. Another good test case would be to see if orders are updating the server.
