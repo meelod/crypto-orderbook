@@ -158,3 +158,6 @@ curl --header "Content-Type: application/json" \
 | `express` | 4.19.2 | Mock backend server |
 | `uuid` | 9.0.1 | Order ID generation |
 | `concurrently` | 6.0.0 | Run frontend + server together |
+
+<img width="1435" height="1027" alt="image" src="https://github.com/user-attachments/assets/c41fa7e1-74a2-42d5-8628-598352bb6932" />
+
