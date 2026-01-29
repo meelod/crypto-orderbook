@@ -9,7 +9,7 @@ A real-time cryptocurrency orderbook interface built in **4 hours** as a fronten
 
 ## Screenshot
 
-![Orderbook UI](./ux/UX%20figma.png)
+<img width="1260" height="1023" alt="Orderbook UI" src="https://github.com/user-attachments/assets/a5b71a16-9c38-4444-a0a1-b49632d19f0a" />
 
 ## Features
 
