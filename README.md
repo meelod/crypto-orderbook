@@ -7,6 +7,10 @@ A real-time cryptocurrency orderbook interface built in **4 hours** as a fronten
 - **Assets**: BTC and ETH orderbook data
 - **Design**: Trading terminal style UI
 
+## Screenshot
+
+![Orderbook UI](./ux/UX%20figma.png)
+
 ## Features
 
 - **Live Orderbook**: Displays bids and asks with price, quantity, and USD amount
@@ -75,7 +79,7 @@ curl --header "Content-Type: application/json" \
 │       └── index.ts              # TypeScript type definitions
 ├── tailwind.config.js            # Tailwind CSS configuration
 └── ux/
-    └── UX figma.png              # Original design mockup
+    └── UX figma.png              # Design mockup
 ```
 
 ## Key Files
@@ -158,6 +162,3 @@ curl --header "Content-Type: application/json" \
 | `express` | 4.19.2 | Mock backend server |
 | `uuid` | 9.0.1 | Order ID generation |
 | `concurrently` | 6.0.0 | Run frontend + server together |
-
-<img width="1435" height="1027" alt="image" src="https://github.com/user-attachments/assets/c41fa7e1-74a2-42d5-8628-598352bb6932" />
-
