@@ -2,18 +2,16 @@
 
 A real-time cryptocurrency orderbook interface built in **4 hours** as a frontend coding exercise.
 
-- **Frontend**: React + TypeScript
+- **Frontend**: React + TypeScript + Tailwind CSS
 - **Backend**: Express.js mock server
 - **Assets**: BTC and ETH orderbook data
-- **Design**: Inspired by Coinbase's orderbook UX
-
-## Demo
-
-![Orderbook UI](./ux/UX%20figma.png)
+- **Design**: Trading terminal style UI
 
 ## Features
 
 - **Live Orderbook**: Displays bids and asks with price, quantity, and USD amount
+- **Depth Visualization**: Visual bars showing order size relative to max
+- **Spread Indicator**: Shows current bid-ask spread
 - **Asset Switching**: Toggle between BTC and ETH orderbooks
 - **Order Placement**: Submit buy/sell limit orders via form
 - **Real-time Updates**: Orders immediately reflect in the orderbook display
@@ -62,18 +60,22 @@ curl --header "Content-Type: application/json" \
 
 ```
 ├── server/
-│   ├── server.js              # Express mock server
+│   ├── server.js                 # Express mock server
 │   └── data/
-│       ├── btc_orderbook.json # BTC order data
-│       └── eth_orderbook.json # ETH order data
+│       ├── btc_orderbook.json    # BTC order data
+│       └── eth_orderbook.json    # ETH order data
 ├── src/
-│   ├── App.tsx                # Main app with asset selector
-│   ├── Orderbook.tsx          # Orderbook display component
-│   ├── OrderForm.tsx          # Order submission form
-│   └── api/
-│       └── api.ts             # API client functions
+│   ├── App.tsx                   # Main app with header and layout
+│   ├── components/
+│   │   ├── Orderbook.tsx         # Orderbook display with depth bars
+│   │   └── OrderForm.tsx         # Order submission form
+│   ├── api/
+│   │   └── api.ts                # API client functions
+│   └── types/
+│       └── index.ts              # TypeScript type definitions
+├── tailwind.config.js            # Tailwind CSS configuration
 └── ux/
-    └── UX figma.png           # Design mockup
+    └── UX figma.png              # Original design mockup
 ```
 
 ## Key Files
@@ -82,10 +84,11 @@ curl --header "Content-Type: application/json" \
 
 | File | Purpose |
 |------|---------|
-| `src/App.tsx` | Root component with asset dropdown and state management |
-| `src/Orderbook.tsx` | Displays bids/asks with price sorting, auto-scrolls to latest asks |
-| `src/OrderForm.tsx` | Form for quantity, price, notional with buy/sell buttons |
-| `src/api/api.ts` | Fetch wrappers for `/orderbook` and `/trade` endpoints |
+| `src/App.tsx` | Root component with header, asset selector, and layout grid |
+| `src/components/Orderbook.tsx` | Displays bids/asks with depth visualization and spread indicator |
+| `src/components/OrderForm.tsx` | Limit/market order form with validation and loading states |
+| `src/api/api.ts` | Typed fetch wrappers for `/orderbook` and `/trade` endpoints |
+| `src/types/index.ts` | TypeScript interfaces for orders, trades, and component props |
 
 ### Backend
 
@@ -128,20 +131,22 @@ curl --header "Content-Type: application/json" \
 
 | Decision | Rationale |
 |----------|-----------|
-| Coinbase-style layout | Familiar UX pattern for crypto traders |
+| Trading terminal aesthetic | Professional look familiar to crypto traders |
+| Depth visualization bars | Quickly see order size distribution |
+| Monospace typography | Better number alignment and terminal feel |
 | Bids sorted high→low | Top of book shows best bid price |
-| Asks sorted low→high | Top of book shows best ask price |
-| Independent scrolling | Users can view full depth without losing context |
+| Asks sorted low→high | Bottom of asks shows best ask price |
+| Independent scrolling | View full depth without losing context |
 | Client-side order updates | Fast feedback; server persistence would be next step |
 
 ## Future Improvements
 
 - Persist orders to server JSON files
 - WebSocket for real-time price updates
-- Market order support (currently limit only)
+- Market order execution
 - Order matching engine simulation
 - Highlight orders that would fill at market price
-- Connection status indicator
+- Price chart integration
 
 ## Dependencies
 
@@ -149,14 +154,7 @@ curl --header "Content-Type: application/json" \
 |---------|---------|---------|
 | `react` | 18.3.1 | Frontend framework |
 | `typescript` | 4.9.5 | Type safety |
+| `tailwindcss` | 3.4.1 | Utility-first CSS |
 | `express` | 4.19.2 | Mock backend server |
 | `uuid` | 9.0.1 | Order ID generation |
 | `concurrently` | 6.0.0 | Run frontend + server together |
-
-## Testing
-
-```bash
-npm test
-```
-
-Runs tests in interactive watch mode.
