@@ -1,74 +1,162 @@
-# NASCENT TAKE HOME TEST
+# Cryptocurrency Orderbook
 
-## Assignment
+A real-time cryptocurrency orderbook interface built in **4 hours** as a frontend coding exercise.
 
-Please thoroughly review the provided Assignment requirements PDF for the description.
+- **Frontend**: React + TypeScript
+- **Backend**: Express.js mock server
+- **Assets**: BTC and ETH orderbook data
+- **Design**: Inspired by Coinbase's orderbook UX
 
-## Candidate Notes
+## Demo
 
-Currently, the Orderbook pulls the data from the server and then updates the client side
-whenever orders are made from the user. The reason I have done it like this is because I wanted to first
-test to see if the orders would be executed without having to change the JSON files. If given more time, I would have updated the server.js code so that users can update the JSON on the server.
+![Orderbook UI](./ux/UX%20figma.png)
 
-For the design, I wanted it to replicate the Orderbook and Order Forms from the Coinbase cryptobook video.
-It made sense not to make any changes if it was already working well for so many users, at least that
-is my assumption. One aspect about the orderbook I kept was how the bids and asks are sorted,
-where the top of the bids are the highest and the bottom of the asks are the lowest. In the future,
-I would have added a way to highlight which of the ask orders would be fulfilled first if the user
-decided to do a market order.
+## Features
 
-I decided that having all the data would be a nice to have feature for users so they have all the information
-they needed to make any decisions in their orders. That is why I made both the bids and asks independently
-scrollable.
+- **Live Orderbook**: Displays bids and asks with price, quantity, and USD amount
+- **Asset Switching**: Toggle between BTC and ETH orderbooks
+- **Order Placement**: Submit buy/sell limit orders via form
+- **Real-time Updates**: Orders immediately reflect in the orderbook display
+- **Scrollable Lists**: Independent scrolling for bids and asks sections
 
-My test cases right now check to see if the webpage and the orderbook are present. In the future, a good
-test case to implement would be to check to see if connection to the server is valid and if data is being pulled
-and shown on the orderbook. Another good test case would be to see if orders are updating the server.
+## Quick Start
 
-## About the Template
+### 1. Install dependencies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```bash
+npm install
+```
 
-### Available Scripts
+### 2. Run
 
-In the project directory, you can run:
+```bash
+npm start
+```
 
-#### `npm start`
+This starts both the React frontend and Express mock server concurrently.
 
-Runs the app in the development mode along with the mock server\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-The mock server is running on [http://localhost:3001](http://localhost:3001).
+## URLs
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+| Service | URL |
+|---------|-----|
+| Frontend | http://localhost:3000 |
+| Mock Server | http://localhost:3001 |
 
-#### `npm test`
+## API Endpoints
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/orderbook/:asset?` | GET | Fetch orderbook (BTC or ETH) |
+| `/trade/` | POST | Submit a trade order |
 
-#### `npm run build`
+### Trade Request Example
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"asset":"BTC","side":"BUY","type":"LIMIT","quantity":2,"price":61000,"notional":122000}' \
+  http://localhost:3001/trade
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## File Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+├── server/
+│   ├── server.js              # Express mock server
+│   └── data/
+│       ├── btc_orderbook.json # BTC order data
+│       └── eth_orderbook.json # ETH order data
+├── src/
+│   ├── App.tsx                # Main app with asset selector
+│   ├── Orderbook.tsx          # Orderbook display component
+│   ├── OrderForm.tsx          # Order submission form
+│   └── api/
+│       └── api.ts             # API client functions
+└── ux/
+    └── UX figma.png           # Design mockup
+```
 
-#### `npm run eject`
+## Key Files
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Frontend Components
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| File | Purpose |
+|------|---------|
+| `src/App.tsx` | Root component with asset dropdown and state management |
+| `src/Orderbook.tsx` | Displays bids/asks with price sorting, auto-scrolls to latest asks |
+| `src/OrderForm.tsx` | Form for quantity, price, notional with buy/sell buttons |
+| `src/api/api.ts` | Fetch wrappers for `/orderbook` and `/trade` endpoints |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Backend
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+| File | Purpose |
+|------|---------|
+| `server/server.js` | Express server with orderbook and trade endpoints, request validation |
+| `server/data/*.json` | Mock orderbook data for BTC and ETH |
 
-### Learn More
+## Architecture
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         FRONTEND                            │
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────────┐  │
+│  │   App.tsx   │───▶│ Orderbook   │    │   OrderForm     │  │
+│  │ (state mgmt)│    │ (bids/asks) │    │  (buy/sell)     │  │
+│  └──────┬──────┘    └──────┬──────┘    └────────┬────────┘  │
+│         │                  │                    │           │
+└─────────┼──────────────────┼────────────────────┼───────────┘
+          │                  │                    │
+          │   GET /orderbook │      POST /trade   │
+          │                  ▼                    ▼
+┌─────────┴───────────────────────────────────────────────────┐
+│                      MOCK SERVER                            │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │                   Express.js                        │    │
+│  │  • /orderbook/:asset - returns JSON orderbook       │    │
+│  │  • /trade - validates order, returns with UUID      │    │
+│  └─────────────────────────────────────────────────────┘    │
+│                            │                                │
+│                            ▼                                │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │              btc_orderbook.json                     │    │
+│  │              eth_orderbook.json                     │    │
+│  └─────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────┘
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Design Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| Coinbase-style layout | Familiar UX pattern for crypto traders |
+| Bids sorted high→low | Top of book shows best bid price |
+| Asks sorted low→high | Top of book shows best ask price |
+| Independent scrolling | Users can view full depth without losing context |
+| Client-side order updates | Fast feedback; server persistence would be next step |
+
+## Future Improvements
+
+- Persist orders to server JSON files
+- WebSocket for real-time price updates
+- Market order support (currently limit only)
+- Order matching engine simulation
+- Highlight orders that would fill at market price
+- Connection status indicator
+
+## Dependencies
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| `react` | 18.3.1 | Frontend framework |
+| `typescript` | 4.9.5 | Type safety |
+| `express` | 4.19.2 | Mock backend server |
+| `uuid` | 9.0.1 | Order ID generation |
+| `concurrently` | 6.0.0 | Run frontend + server together |
+
+## Testing
+
+```bash
+npm test
+```
+
+Runs tests in interactive watch mode.
