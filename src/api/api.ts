@@ -1,34 +1,39 @@
-// Skeleton for API calls
+import { TradeOrder, TradeResponse, OrderbookResponse } from '../types';
 
-// Orderbook API
-export const getOrderbook = async (asset: string) => {
-    const response = await fetch(`/orderbook/${asset}`);
+const API_BASE = 'http://localhost:3001';
+
+/**
+ * Fetch orderbook data for a specific asset
+ */
+export const getOrderbook = async (asset: string): Promise<OrderbookResponse> => {
+  const response = await fetch(`/orderbook/${asset}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch orderbook data');
+  }
+  return response.json();
+};
+
+/**
+ * Submit a trade order
+ */
+export const sendTrade = async (order: TradeOrder): Promise<TradeResponse | null> => {
+  try {
+    const response = await fetch(`${API_BASE}/trade/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(order),
+    });
+
     if (!response.ok) {
-      throw new Error('Failed to fetch orderbook data');
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to place order');
     }
-    return response.json();
-  };
 
-// Trade API
-export const sendTrade = async (order: { asset: string, side: 'BUY' | 'SELL', type: 'LIMIT' | 'MARKET', quantity: number, price?: number, notional: number }) => {
-    try { // Try to send the trade request
-        console.log('sending trade request:', order);
-        const response = await fetch('http://localhost:3000/trade/', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(order),
-        });
-        if (!response.ok) {
-            throw new Error('Failed to place order from API');
-        }
-        const data = await response.json();
-        console.log('trade response:', data);
-        return data;
-    } catch (error) {
-        console.error('Error placing order:', error);
-        return null;
-    }
-  };
-  
+    return response.json();
+  } catch (error) {
+    console.error('Error placing order:', error);
+    return null;
+  }
+};
